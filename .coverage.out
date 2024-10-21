@@ -1,0 +1,11 @@
+mode: set
+StellaRP/modules/config/config.go:17.46,19.2 1 1
+StellaRP/modules/config/config.go:21.42,23.2 1 1
+StellaRP/modules/config/config.go:25.42,27.2 1 1
+StellaRP/modules/config/config.go:29.42,31.2 1 1
+StellaRP/modules/config/config.go:33.46,35.2 1 1
+StellaRP/modules/config/config.go:37.22,39.2 1 1
+StellaRP/modules/config/config.go:41.26,49.2 1 1
+StellaRP/modules/config/configModule.go:5.35,9.18 2 0
+StellaRP/modules/config/configModule.go:9.18,11.4 1 0
+StellaRP/modules/config/configModule.go:14.2,14.15 1 0

@@ -1,0 +1,8 @@
+use (
+	.
+	common
+	modules/identity
+	modules/config
+)
+
+go 1.23.2
