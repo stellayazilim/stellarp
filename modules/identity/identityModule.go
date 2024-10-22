@@ -1,16 +1,16 @@
 package identity
 
 import (
+	"StellaRP/modules/identity/infrastructure"
+	"StellaRP/modules/identity/presentation"
 	"go.uber.org/fx"
 )
 
-type Identity struct {
-}
-
-func InitIdentityModule() fx.Option {
+func UseIdentityModule() fx.Option {
 
 	m := fx.Module("Identity",
-		fx.Provide(func() *Identity { return new(Identity) }),
+		presentation.UsePresentation(),
+		infrastructure.UseInfrastructure(),
 	)
 
 	return m

@@ -12,7 +12,7 @@ func main() {
 
 func Bootstrap() {
 	fx.New(
-		config.InitConfigModule(),
-		identity.InitIdentityModule(),
+		config.UseConfigModule(),
+		identity.UseIdentityModule(),
 	).Run()
 }
