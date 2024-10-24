@@ -3,6 +3,7 @@ package config
 import (
 	"github.com/joho/godotenv"
 	"os"
+	"testing"
 )
 
 type Config struct {
@@ -34,6 +35,9 @@ func (c Config) GetPostgresDatabase() string {
 }
 
 func loadEnv() error {
+	if testing.Testing() {
+		return godotenv.Load(".test.env")
+	}
 	return godotenv.Load(".env")
 }
 
