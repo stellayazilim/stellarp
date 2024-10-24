@@ -65,7 +65,7 @@ func TestShouldCreateConfigFromLoadedEnv(t *testing.T) {
 func TestInitConfigModule(t *testing.T) {
 	g := NewGomegaWithT(t)
 
-	configModule := InitConfigModule()
+	configModule := UseConfigModule()
 
 	testModule := fxtest.New(t, configModule, fx.Invoke(func(c *Config) {
 
