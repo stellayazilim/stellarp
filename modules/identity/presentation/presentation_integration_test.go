@@ -1,6 +1,7 @@
 ﻿package presentation
 
 import (
+	"StellaRP/modules/config"
 	"StellaRP/modules/identity/presentation/handlers"
 	"context"
 	"github.com/gin-gonic/gin"
@@ -37,6 +38,7 @@ func TestGinIntegration(t *testing.T) {
 func TestStartServer_ShouldStart(t *testing.T) {
 	g := NewGomegaWithT(t)
 	f := fxtest.New(t,
+		config.UseConfigModule("./../../.test.env"),
 		fx.Provide(UseGin),
 		fx.Invoke(handlers.UseHandlers),
 		fx.Invoke(StartServer),
@@ -58,6 +60,7 @@ func TestStartServer_ShouldFailOnNonEmptyPort(t *testing.T) {
 	g := NewGomegaWithT(t)
 
 	f := fxtest.New(t,
+		config.UseConfigModule("./../../.test.env"),
 		fx.Provide(UseGin),
 		fx.Invoke(handlers.UseHandlers),
 		fx.Invoke(StartServer),

@@ -12,14 +12,14 @@ import (
 func TestLoadEnvShouldLoadEnvFile(t *testing.T) {
 	g := NewGomegaWithT(t)
 
-	err := loadEnv()
+	err := loadEnv("../../.test.env")
 	g.Expect(err).Should(BeNil())
 	g.Expect(os.Getenv("POSTGRES_DATABASE")).To(Equal("postgres"))
 }
 
 func TestShouldCreateConfigFromLoadedEnv(t *testing.T) {
 	g := NewGomegaWithT(t)
-	_ = loadEnv()
+	_ = loadEnv("../../.test.env")
 
 	c := newConfig()
 
@@ -54,6 +54,11 @@ func TestShouldCreateConfigFromLoadedEnv(t *testing.T) {
 			expected:    "postgres",
 			method:      "GetPostgresDatabase",
 		},
+		{
+			description: "should have identityModulePort set",
+			expected:    "8091",
+			method:      "GetIdentityModulePort",
+		},
 	}
 
 	for _, test := range tests {
@@ -65,7 +70,7 @@ func TestShouldCreateConfigFromLoadedEnv(t *testing.T) {
 func TestInitConfigModule(t *testing.T) {
 	g := NewGomegaWithT(t)
 
-	configModule := UseConfigModule()
+	configModule := UseConfigModule("../../.test.env")
 
 	testModule := fxtest.New(t, configModule, fx.Invoke(func(c *Config) {
 

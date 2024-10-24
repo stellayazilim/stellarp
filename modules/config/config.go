@@ -1,17 +1,20 @@
 package config
 
 import (
+	_ "github.com/flashlabs/rootpath"
 	"github.com/joho/godotenv"
 	"os"
 	"testing"
 )
 
 type Config struct {
-	postgresPassword string
-	postgresUser     string
-	postgresHost     string
-	postgresPort     string
-	postgresDatabase string
+	postgresPassword   string
+	postgresUser       string
+	postgresHost       string
+	postgresPort       string
+	postgresDatabase   string
+	testing            bool
+	identityModulePort string
 }
 
 func (c Config) GetPostgresPassword() string {
@@ -34,24 +37,22 @@ func (c Config) GetPostgresDatabase() string {
 	return c.postgresDatabase
 }
 
-func loadEnv() error {
-	var err error
-	if testing.Testing() {
-		err = godotenv.Load(".env")
+func (c Config) GetIdentityModulePort() string {
+	return c.identityModulePort
+}
+func loadEnv(filenames ...string) error {
 
-	}
-	err = godotenv.Load(".test.env")
-
-	return err
-
+	return godotenv.Load(filenames...)
 }
 
 func newConfig() *Config {
 	return &Config{
-		postgresPassword: os.Getenv("POSTGRES_PASSWORD"),
-		postgresUser:     os.Getenv("POSTGRES_USER"),
-		postgresHost:     os.Getenv("POSTGRES_HOST"),
-		postgresPort:     os.Getenv("POSTGRES_PORT"),
-		postgresDatabase: os.Getenv("POSTGRES_DATABASE"),
+		postgresPassword:   os.Getenv("POSTGRES_PASSWORD"),
+		postgresUser:       os.Getenv("POSTGRES_USER"),
+		postgresHost:       os.Getenv("POSTGRES_HOST"),
+		postgresPort:       os.Getenv("POSTGRES_PORT"),
+		postgresDatabase:   os.Getenv("POSTGRES_DATABASE"),
+		identityModulePort: os.Getenv("IDENTITY_MODULE_PORT"),
+		testing:            testing.Testing(),
 	}
 }
