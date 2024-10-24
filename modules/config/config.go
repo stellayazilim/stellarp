@@ -35,7 +35,7 @@ func (c Config) GetPostgresDatabase() string {
 
 func loadEnv() error {
 	dir, _ := os.Getwd()
-	return godotenv.Load(dir + "\\.env")
+	return godotenv.Load(dir + "/.env")
 }
 
 func newConfig() *Config {
