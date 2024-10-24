@@ -2,6 +2,7 @@
 
 import (
 	"StellaRP/modules/identity/presentation/handlers"
+	"context"
 	"github.com/gin-gonic/gin"
 	. "github.com/onsi/gomega"
 	"go.uber.org/fx"
@@ -31,4 +32,42 @@ func TestGinIntegration(t *testing.T) {
 
 	f.RequireStart()
 
+}
+
+func TestStartServer_ShouldStart(t *testing.T) {
+	g := NewGomegaWithT(t)
+	f := fxtest.New(t,
+		fx.Provide(UseGin),
+		fx.Invoke(handlers.UseHandlers),
+		fx.Invoke(StartServer),
+	)
+
+	defer f.RequireStop()
+
+	f.RequireStart()
+
+	g.Expect(f.Err()).NotTo(HaveOccurred())
+	g.Expect(f.App.Err()).NotTo(HaveOccurred())
+
+	err := f.App.Err()
+
+	g.Expect(err).To(BeNil())
+}
+
+func TestStartServer_ShouldFailOnNonEmptyPort(t *testing.T) {
+	g := NewGomegaWithT(t)
+
+	f := fxtest.New(t,
+		fx.Provide(UseGin),
+		fx.Invoke(handlers.UseHandlers),
+		fx.Invoke(StartServer),
+		fx.Invoke(StartServer),
+	)
+
+	defer f.RequireStop()
+
+	err := f.Start(context.Background())
+
+	g.Expect(err).To(HaveOccurred())
+	g.Expect(err.Error()).To(ContainSubstring("bind: Only one usage of each socket address (protocol/network address/port) is normally permitted"))
 }

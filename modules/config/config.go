@@ -35,10 +35,15 @@ func (c Config) GetPostgresDatabase() string {
 }
 
 func loadEnv() error {
+	var err error
 	if testing.Testing() {
-		return godotenv.Load(".test.env")
+		err = godotenv.Load(".env")
+
 	}
-	return godotenv.Load(".env")
+	err = godotenv.Load(".test.env")
+
+	return err
+
 }
 
 func newConfig() *Config {
