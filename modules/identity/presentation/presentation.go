@@ -1,8 +1,10 @@
 package presentation
 
 import (
+	"StellaRP/modules/config"
 	"StellaRP/modules/identity/presentation/handlers"
 	"context"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/fx"
 	"golang.org/x/sync/errgroup"
@@ -17,10 +19,10 @@ func UseGin() *gin.Engine {
 	return router
 }
 
-func StartServer(lc fx.Lifecycle, router *gin.Engine) error {
+func StartServer(lc fx.Lifecycle, cfg *config.Config, router *gin.Engine) error {
 
 	s := &http.Server{
-		Addr:           ":8080",
+		Addr:           fmt.Sprintf(":%s", cfg.GetIdentityModulePort()),
 		Handler:        router,
 		ReadTimeout:    10 * time.Second,
 		WriteTimeout:   10 * time.Second,
