@@ -1,8 +1,8 @@
 use (
 	.
 	common
-	modules/identity
 	modules/config
+	modules/identity
 )
 
 go 1.23.2
