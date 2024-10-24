@@ -4,6 +4,7 @@ import (
 	"StellaRP/modules/identity/domain/realm"
 	"StellaRP/modules/identity/infrastructure/persistence/interfaces"
 	"context"
+	"fmt"
 
 	"github.com/jackc/pgx/v5"
 )
@@ -14,34 +15,41 @@ type (
 	}
 )
 
-func (r *realmStore) FindRealms() []realm.IRealm {
+func (r *realmStore) Find(ctx context.Context) []realm.IRealm {
 	//TODO implement me
-	panic("implement me")
+	return nil
 }
 
-func (r *realmStore) FindOneRealm(entity realm.IRealm) realm.IRealm {
+func (r *realmStore) FindOne(ctx context.Context, entity realm.IRealm) realm.IRealm {
 	//TODO implement me
-	panic("implement me")
+	return nil
 }
 
-func (r *realmStore) CreateRealm(entity realm.IRealm) error {
+func (r *realmStore) Update(ctx context.Context, entity realm.IRealm) error {
 	//TODO implement me
-	panic("implement me")
+	return nil
 }
 
-func (r *realmStore) UpdateRealm(entity realm.IRealm) error {
+func (r *realmStore) Delete(ctx context.Context, entity realm.IRealm) error {
 	//TODO implement me
-	panic("implement me")
-}
-
-func (r *realmStore) DeleteRealm(entity realm.IRealm) error {
-	//TODO implement me
-	panic("implement me")
+	return nil
 }
 
 func (r *realmStore) Create(ctx context.Context, realm realm.IRealm) error {
+	tx, err := r.conn.Begin(ctx)
 
-	return nil
+	if err != nil {
+		return err
+	}
+	fmt.Println("tx begin")
+	if _, err := tx.Exec(ctx /*sql*/, `INSERT INTO realms VALUES (@id, @name)`, pgx.NamedArgs{
+		"id":   realm.GetId().GetValue(),
+		"name": realm.GetName(),
+	}); err != nil {
+		return tx.Rollback(ctx)
+	}
+
+	return tx.Commit(ctx)
 }
 
 func UsePgRealmStore(conn *pgx.Conn) interfaces.IRealmStore {

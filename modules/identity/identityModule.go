@@ -11,8 +11,8 @@ func UseIdentityModule() fx.Option {
 
 	m := fx.Module("Identity",
 		presentation.UsePresentation(),
-		infrastructure.UseInfrastructure(),
 		application.UseApplication(),
+		infrastructure.UseInfrastructure(),
 	)
 
 	return m
