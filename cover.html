@@ -1,0 +1,936 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>cmd: Go Coverage Report</title>
+		<style>
+			body {
+				background: black;
+				color: rgb(80, 80, 80);
+			}
+			body, pre, #legend span {
+				font-family: Menlo, monospace;
+				font-weight: bold;
+			}
+			#topbar {
+				background: black;
+				position: fixed;
+				top: 0; left: 0; right: 0;
+				height: 42px;
+				border-bottom: 1px solid rgb(80, 80, 80);
+			}
+			#content {
+				margin-top: 50px;
+			}
+			#nav, #legend {
+				float: left;
+				margin-left: 10px;
+			}
+			#legend {
+				margin-top: 12px;
+			}
+			#nav {
+				margin-top: 10px;
+			}
+			#legend span {
+				margin: 0 5px;
+			}
+			.cov0 { color: rgb(192, 0, 0) }
+.cov1 { color: rgb(128, 128, 128) }
+.cov2 { color: rgb(116, 140, 131) }
+.cov3 { color: rgb(104, 152, 134) }
+.cov4 { color: rgb(92, 164, 137) }
+.cov5 { color: rgb(80, 176, 140) }
+.cov6 { color: rgb(68, 188, 143) }
+.cov7 { color: rgb(56, 200, 146) }
+.cov8 { color: rgb(44, 212, 149) }
+.cov9 { color: rgb(32, 224, 152) }
+.cov10 { color: rgb(20, 236, 155) }
+
+		</style>
+	</head>
+	<body>
+		<div id="topbar">
+			<div id="nav">
+				<select id="files">
+				
+				<option value="file0">StellaRP/cmd/main.go (0.0%)</option>
+				
+				<option value="file1">StellaRP/modules/config/config.go (100.0%)</option>
+				
+				<option value="file2">StellaRP/modules/config/configModule.go (100.0%)</option>
+				
+				<option value="file3">StellaRP/modules/identity/domain/client/Entities/scope.go (100.0%)</option>
+				
+				<option value="file4">StellaRP/modules/identity/domain/client/ValueObjects/clientId.go (100.0%)</option>
+				
+				<option value="file5">StellaRP/modules/identity/domain/client/ValueObjects/scopeId.go (100.0%)</option>
+				
+				<option value="file6">StellaRP/modules/identity/domain/client/client.go (100.0%)</option>
+				
+				<option value="file7">StellaRP/modules/identity/domain/realm/Entity/realmUser.go (100.0%)</option>
+				
+				<option value="file8">StellaRP/modules/identity/domain/realm/ValueObject/realmId.go (100.0%)</option>
+				
+				<option value="file9">StellaRP/modules/identity/domain/realm/ValueObject/realmUserId.go (100.0%)</option>
+				
+				<option value="file10">StellaRP/modules/identity/domain/realm/realm.go (100.0%)</option>
+				
+				<option value="file11">StellaRP/modules/identity/domain/user/ValueObject/userId.go (100.0%)</option>
+				
+				<option value="file12">StellaRP/modules/identity/identityModule.go (100.0%)</option>
+				
+				<option value="file13">StellaRP/modules/identity/infrastructure/infrastructure.go (100.0%)</option>
+				
+				<option value="file14">StellaRP/modules/identity/infrastructure/persistence/stores/postgres/postgres.go (0.0%)</option>
+				
+				<option value="file15">StellaRP/modules/identity/infrastructure/persistence/stores/postgres/repositories/realmRepository.go (0.0%)</option>
+				
+				<option value="file16">StellaRP/modules/identity/infrastructure/persistence/stores/store.go (100.0%)</option>
+				
+				<option value="file17">StellaRP/modules/identity/presentation/handlers/authHandler/LoginHandler.go (0.0%)</option>
+				
+				<option value="file18">StellaRP/modules/identity/presentation/handlers/authHandler/UseAuthHandlers.go (100.0%)</option>
+				
+				<option value="file19">StellaRP/modules/identity/presentation/handlers/handlers.go (100.0%)</option>
+				
+				<option value="file20">StellaRP/modules/identity/presentation/handlers/realmHandler/UseRealmHandlers.go (100.0%)</option>
+				
+				<option value="file21">StellaRP/modules/identity/presentation/presentation.go (21.4%)</option>
+				
+				</select>
+			</div>
+			<div id="legend">
+				<span>not tracked</span>
+			
+				<span class="cov0">not covered</span>
+				<span class="cov8">covered</span>
+			
+			</div>
+		</div>
+		<div id="content">
+		
+		<pre class="file" id="file0" style="display: none">package main
+
+import (
+        "StellaRP/modules/config"
+        "StellaRP/modules/identity"
+        "go.uber.org/fx"
+)
+
+func main() <span class="cov0" title="0">{
+        Bootstrap()
+}</span>
+
+func Bootstrap() <span class="cov0" title="0">{
+        fx.New(
+                config.UseConfigModule(),
+                identity.UseIdentityModule(),
+        ).Run()
+}</span>
+</pre>
+		
+		<pre class="file" id="file1" style="display: none">package config
+
+import (
+        "github.com/joho/godotenv"
+        "os"
+)
+
+type Config struct {
+        postgresPassword string
+        postgresUser     string
+        postgresHost     string
+        postgresPort     string
+        postgresDatabase string
+}
+
+func (c Config) GetPostgresPassword() string <span class="cov8" title="1">{
+        return c.postgresPassword
+}</span>
+
+func (c Config) GetPostgresUser() string <span class="cov8" title="1">{
+        return c.postgresUser
+}</span>
+
+func (c Config) GetPostgresHost() string <span class="cov8" title="1">{
+        return c.postgresHost
+}</span>
+
+func (c Config) GetPostgresPort() string <span class="cov8" title="1">{
+        return c.postgresPort
+}</span>
+
+func (c Config) GetPostgresDatabase() string <span class="cov8" title="1">{
+        return c.postgresDatabase
+}</span>
+
+func loadEnv() error <span class="cov8" title="1">{
+        dir, _ := os.Getwd()
+        return godotenv.Load(dir + "\\.env")
+}</span>
+
+func newConfig() *Config <span class="cov8" title="1">{
+        return &amp;Config{
+                postgresPassword: os.Getenv("POSTGRES_PASSWORD"),
+                postgresUser:     os.Getenv("POSTGRES_USER"),
+                postgresHost:     os.Getenv("POSTGRES_HOST"),
+                postgresPort:     os.Getenv("POSTGRES_PORT"),
+                postgresDatabase: os.Getenv("POSTGRES_DATABASE"),
+        }
+}</span>
+</pre>
+		
+		<pre class="file" id="file2" style="display: none">package config
+
+import "go.uber.org/fx"
+
+func UseConfigModule() fx.Option <span class="cov8" title="1">{
+        loadEnv()
+
+        module := fx.Module("ConfigModule", fx.Provide(
+                func() *Config </span><span class="cov8" title="1">{
+                        return newConfig()
+                }</span>,
+        ))
+
+        <span class="cov8" title="1">return module</span>
+}
+</pre>
+		
+		<pre class="file" id="file3" style="display: none">package Entities
+
+import (
+        "StellaRP/modules/identity/domain/client/ValueObjects"
+)
+
+type IScope interface {
+        GetId() ValueObjects.ScopeId
+        GetName() string
+        SetName(name string)
+        GetDescription() string
+        SetDescription(description string)
+}
+type Scope struct {
+        id          ValueObjects.ScopeId
+        name        string
+        description string
+}
+
+func (s *Scope) GetId() ValueObjects.ScopeId <span class="cov8" title="1">{
+        return s.id
+}</span>
+
+func (s *Scope) GetName() string <span class="cov8" title="1">{
+        return s.name
+}</span>
+
+func (s *Scope) SetName(name string) <span class="cov8" title="1">{
+        s.name = name
+}</span>
+
+func (s *Scope) GetDescription() string <span class="cov8" title="1">{
+        return s.description
+}</span>
+
+func (s *Scope) SetDescription(description string) <span class="cov8" title="1">{
+        s.description = description
+}</span>
+
+func NewScope(
+        id ValueObjects.ScopeId,
+        name string,
+        description string,
+) IScope <span class="cov8" title="1">{
+        return &amp;Scope{
+                id:          id,
+                name:        name,
+                description: description,
+        }
+}</span>
+</pre>
+		
+		<pre class="file" id="file4" style="display: none">package ValueObjects
+
+import (
+        "github.com/lucsky/cuid"
+        "reflect"
+)
+
+type ClientId struct {
+        value string
+}
+
+func (c ClientId) IsEqual(other ClientId) bool <span class="cov8" title="1">{
+        return reflect.DeepEqual(c, other)
+}</span>
+
+func (c ClientId) GetValue() string <span class="cov8" title="1">{
+        return c.value
+}</span>
+
+func ParseClientId(value string) (ClientId, error) <span class="cov8" title="1">{
+
+        if err := cuid.IsCuid(value); err != nil </span><span class="cov8" title="1">{
+                return ClientId{}, err
+        }</span>
+
+        <span class="cov8" title="1">return ClientId{
+                value: value,
+        }, nil</span>
+}
+func NewClientId() ClientId <span class="cov8" title="1">{
+        return ClientId{
+                value: cuid.New(),
+        }
+}</span>
+</pre>
+		
+		<pre class="file" id="file5" style="display: none">package ValueObjects
+
+import (
+        "github.com/lucsky/cuid"
+        "reflect"
+)
+
+type ScopeId struct {
+        value string
+}
+
+func (s ScopeId) IsEqual(other ScopeId) bool <span class="cov8" title="1">{
+        return reflect.DeepEqual(s, other)
+}</span>
+
+func (s ScopeId) GetValue() string <span class="cov8" title="1">{
+        return s.value
+}</span>
+
+func ParseScopeId(value string) (ScopeId, error) <span class="cov8" title="1">{
+
+        if err := cuid.IsCuid(value); err != nil </span><span class="cov8" title="1">{
+                return ScopeId{}, err
+        }</span>
+        <span class="cov8" title="1">return ScopeId{
+                value: value,
+        }, nil</span>
+}
+func NewScopeId() ScopeId <span class="cov8" title="1">{
+        return ScopeId{
+                value: cuid.New(),
+        }
+}</span>
+</pre>
+		
+		<pre class="file" id="file6" style="display: none">package client
+
+import (
+        "StellaRP/modules/identity/domain/client/Entities"
+        "StellaRP/modules/identity/domain/client/ValueObjects"
+)
+
+type IClient interface {
+        IsEqual(other IClient) bool
+        GetId() ValueObjects.ClientId
+        GetName() string
+        SetName(n string)
+        GetDescription() string
+        SetDescription(d string)
+        GetScopes() []Entities.IScope
+}
+
+type Client struct {
+        Id          ValueObjects.ClientId
+        Name        string
+        Description string
+        Scopes      []Entities.IScope
+}
+
+func (c *Client) IsEqual(other IClient) bool <span class="cov8" title="1">{
+        return c.Id.IsEqual(other.GetId())
+}</span>
+
+func (c *Client) GetId() ValueObjects.ClientId <span class="cov8" title="1">{
+        return c.Id
+}</span>
+
+func (c *Client) GetName() string <span class="cov8" title="1">{
+        return c.Name
+}</span>
+
+func (c *Client) SetName(n string) <span class="cov8" title="1">{
+        c.Name = n
+}</span>
+
+func (c *Client) GetDescription() string <span class="cov8" title="1">{
+        return c.Description
+}</span>
+
+func (c *Client) GetScopes() []Entities.IScope <span class="cov8" title="1">{
+        return c.Scopes
+}</span>
+
+func (c *Client) SetDescription(d string) <span class="cov8" title="1">{
+        c.Description = d
+}</span>
+
+func NewClient(
+        id ValueObjects.ClientId,
+        name string,
+        description string,
+        scopes []Entities.IScope,
+) IClient <span class="cov8" title="1">{
+        return &amp;Client{
+                Id:          id,
+                Name:        name,
+                Description: description,
+                Scopes:      scopes,
+        }
+}</span>
+</pre>
+		
+		<pre class="file" id="file7" style="display: none">package Entity
+
+import "StellaRP/modules/identity/domain/realm/ValueObject"
+
+type IRealmUser interface {
+        IsEqual(other IRealmUser) bool
+        GetId() ValueObject.IRealmUserId
+        GetEmail() string
+        SetEmail(email string)
+        GetFirstName() string
+        SetFirstName(firstName string)
+        GetLastName() string
+        SetLastName(lastName string)
+        GetPassword() string
+        SetPassword(password string)
+}
+
+type realmUser struct {
+        id        ValueObject.IRealmUserId
+        email     string
+        firstName string
+        lastName  string
+        password  string
+        realmId   string
+}
+
+func (r *realmUser) IsEqual(other IRealmUser) bool <span class="cov8" title="1">{
+        id := r.GetId()
+        return id.IsEqual(other.GetId())
+}</span>
+
+func (r *realmUser) GetId() ValueObject.IRealmUserId <span class="cov8" title="1">{
+        return r.id
+}</span>
+
+func (r *realmUser) GetEmail() string <span class="cov8" title="1">{
+        return r.email
+}</span>
+func (r *realmUser) SetEmail(e string) <span class="cov8" title="1">{
+        r.email = e
+}</span>
+
+func (r *realmUser) GetFirstName() string <span class="cov8" title="1">{
+        return r.firstName
+}</span>
+func (r *realmUser) SetFirstName(n string) <span class="cov8" title="1">{
+        r.firstName = n
+}</span>
+
+func (r *realmUser) GetLastName() string <span class="cov8" title="1">{
+        return r.lastName
+}</span>
+
+func (r *realmUser) SetLastName(l string) <span class="cov8" title="1">{
+        r.lastName = l
+}</span>
+
+func (r *realmUser) GetPassword() string <span class="cov8" title="1">{
+        return r.password
+}</span>
+
+func (r *realmUser) SetPassword(p string) <span class="cov8" title="1">{
+        r.password = p
+}</span>
+
+func NewRealmUser(id ValueObject.IRealmUserId, email string, firstName string, lastName string, password string) IRealmUser <span class="cov8" title="1">{
+        return &amp;realmUser{
+                id:        id,
+                email:     email,
+                firstName: firstName,
+                lastName:  lastName,
+                password:  password,
+        }
+}</span>
+</pre>
+		
+		<pre class="file" id="file8" style="display: none">package ValueObject
+
+import (
+        "reflect"
+
+        "github.com/lucsky/cuid"
+)
+
+type IRealmId interface {
+        GetValue() string
+        IsEqual(other IRealmId) bool
+}
+
+type RealmId struct {
+        value string
+}
+
+func (r *RealmId) GetValue() string <span class="cov8" title="1">{
+        return r.value
+}</span>
+
+func (r *RealmId) IsEqual(other IRealmId) bool <span class="cov8" title="1">{
+        return reflect.DeepEqual(r, other)
+}</span>
+
+func ParseRealmId(value string) (IRealmId, error) <span class="cov8" title="1">{
+
+        if err := cuid.IsCuid(value); err != nil </span><span class="cov8" title="1">{
+                return nil, err
+        }</span>
+
+        <span class="cov8" title="1">return &amp;RealmId{value: value}, nil</span>
+}
+
+func NewRealmId() IRealmId <span class="cov8" title="1">{
+        return &amp;RealmId{
+                value: cuid.New(),
+        }
+}</span>
+</pre>
+		
+		<pre class="file" id="file9" style="display: none">package ValueObject
+
+import (
+        "github.com/lucsky/cuid"
+        "reflect"
+)
+
+type IRealmUserId interface {
+        IsEqual(other IRealmUserId) bool
+        GetValue() string
+}
+
+type realmUserId struct {
+        value string
+}
+
+func (r *realmUserId) IsEqual(other IRealmUserId) bool <span class="cov8" title="1">{
+
+        return reflect.DeepEqual(r, other)
+}</span>
+
+func (r *realmUserId) GetValue() string <span class="cov8" title="1">{
+        return r.value
+}</span>
+
+func ParseRealmUserId(value string) (IRealmUserId, error) <span class="cov8" title="1">{
+
+        if err := cuid.IsCuid(value); err != nil </span><span class="cov8" title="1">{
+                return nil, err
+        }</span>
+
+        <span class="cov8" title="1">return &amp;realmUserId{
+                value: value,
+        }, nil</span>
+}
+
+func NewRealmUserId() IRealmUserId <span class="cov8" title="1">{
+        return &amp;realmUserId{
+                value: cuid.New(),
+        }
+}</span>
+</pre>
+		
+		<pre class="file" id="file10" style="display: none">package realm
+
+import (
+        "StellaRP/modules/identity/domain/realm/Entity"
+        "StellaRP/modules/identity/domain/realm/ValueObject"
+)
+
+type IRealm interface {
+        GetId() ValueObject.IRealmId
+        IsEqual(other IRealm) bool
+        GetName() string
+        SetName(name string)
+        GetUsers() []Entity.IRealmUser
+        SetUsers(users []Entity.IRealmUser)
+}
+
+type realm struct {
+        id    ValueObject.IRealmId
+        name  string
+        users []Entity.IRealmUser
+}
+
+func (r *realm) GetId() ValueObject.IRealmId <span class="cov8" title="1">{
+        return r.id
+}</span>
+
+func (r *realm) IsEqual(other IRealm) bool <span class="cov8" title="1">{
+
+        id := r.GetId()
+
+        return id.IsEqual(other.GetId())
+}</span>
+
+func (r *realm) GetName() string <span class="cov8" title="1">{
+        return r.name
+}</span>
+
+func (r *realm) SetName(value string) <span class="cov8" title="1">{
+        r.name = value
+}</span>
+
+func (r *realm) GetUsers() []Entity.IRealmUser <span class="cov8" title="1">{
+        return r.users
+}</span>
+
+func (r *realm) SetUsers(users []Entity.IRealmUser) <span class="cov8" title="1">{
+        r.users = users
+}</span>
+
+func NewRealm(
+        id ValueObject.IRealmId,
+        name string,
+        users []Entity.IRealmUser,
+) IRealm <span class="cov8" title="1">{
+        return &amp;realm{
+                id:    id,
+                name:  name,
+                users: users,
+        }
+}</span>
+</pre>
+		
+		<pre class="file" id="file11" style="display: none">package ValueObject
+
+import (
+        "github.com/lucsky/cuid"
+)
+
+type IUserId interface {
+        GetValue() string
+}
+
+type userId struct {
+        value string
+}
+
+func (u *userId) GetValue() string <span class="cov8" title="1">{
+        return u.value
+}</span>
+
+func ParseUserId(value string) (IUserId, error) <span class="cov8" title="1">{
+        if err := cuid.IsCuid(value); err != nil </span><span class="cov8" title="1">{
+                return nil, err
+        }</span>
+
+        <span class="cov8" title="1">return &amp;userId{value}, nil</span>
+}
+
+func NewUserId() IUserId <span class="cov8" title="1">{
+        return &amp;userId{
+                value: cuid.New(),
+        }
+}</span>
+</pre>
+		
+		<pre class="file" id="file12" style="display: none">package identity
+
+import (
+        "StellaRP/modules/identity/infrastructure"
+        "StellaRP/modules/identity/presentation"
+        "go.uber.org/fx"
+)
+
+func UseIdentityModule() fx.Option <span class="cov8" title="1">{
+
+        m := fx.Module("Identity",
+                presentation.UsePresentation(),
+                infrastructure.UseInfrastructure(),
+        )
+
+        return m
+}</span>
+</pre>
+		
+		<pre class="file" id="file13" style="display: none">package infrastructure
+
+import (
+        "StellaRP/modules/identity/infrastructure/persistence/stores"
+        "go.uber.org/fx"
+)
+
+func UseInfrastructure() fx.Option <span class="cov8" title="1">{
+        return fx.Options(
+                stores.UseStores(),
+        )
+}</span>
+</pre>
+		
+		<pre class="file" id="file14" style="display: none">package postgres
+
+import (
+        "StellaRP/modules/config"
+        "context"
+        "fmt"
+        "github.com/jackc/pgx/v5"
+)
+
+func UsePostgres(cfg *config.Config) (*pgx.Conn, error) <span class="cov0" title="0">{
+
+        connString := fmt.Sprintf(
+                "postgres://%s:%s@%s:%d/%s",
+                cfg.GetPostgresUser(),
+                cfg.GetPostgresPassword(),
+                cfg.GetPostgresHost(),
+                5432,
+                cfg.GetPostgresDatabase(),
+        )
+
+        conn, err := pgx.Connect(context.Background(), connString)
+
+        if err != nil </span><span class="cov0" title="0">{
+                fmt.Printf("Unable to connect to database: %v\n", err)
+                return nil, err
+        }</span>
+
+        <span class="cov0" title="0">return conn, nil</span>
+}
+</pre>
+		
+		<pre class="file" id="file15" style="display: none">package repositories
+
+import (
+        "StellaRP/modules/identity/domain/realm"
+        "StellaRP/modules/identity/infrastructure/persistence/interfaces"
+        "context"
+
+        "github.com/jackc/pgx/v5"
+)
+
+type (
+        realmStore struct {
+                conn *pgx.Conn
+        }
+)
+
+func (r *realmStore) FindRealms() []realm.IRealm <span class="cov0" title="0">{
+        //TODO implement me
+        panic("implement me")</span>
+}
+
+func (r *realmStore) FindOneRealm(entity realm.IRealm) realm.IRealm <span class="cov0" title="0">{
+        //TODO implement me
+        panic("implement me")</span>
+}
+
+func (r *realmStore) CreateRealm(entity realm.IRealm) error <span class="cov0" title="0">{
+        //TODO implement me
+        panic("implement me")</span>
+}
+
+func (r *realmStore) UpdateRealm(entity realm.IRealm) error <span class="cov0" title="0">{
+        //TODO implement me
+        panic("implement me")</span>
+}
+
+func (r *realmStore) DeleteRealm(entity realm.IRealm) error <span class="cov0" title="0">{
+        //TODO implement me
+        panic("implement me")</span>
+}
+
+func (r *realmStore) Create(ctx context.Context, realm realm.IRealm) error <span class="cov0" title="0">{
+
+        return nil
+}</span>
+
+func UsePgRealmStore(conn *pgx.Conn) interfaces.IRealmStore <span class="cov0" title="0">{
+        return &amp;realmStore{
+                conn: conn,
+        }
+}</span>
+</pre>
+		
+		<pre class="file" id="file16" style="display: none">package stores
+
+import (
+        "StellaRP/modules/identity/infrastructure/persistence/interfaces"
+        "StellaRP/modules/identity/infrastructure/persistence/stores/postgres"
+        "StellaRP/modules/identity/infrastructure/persistence/stores/postgres/repositories"
+        "go.uber.org/fx"
+)
+
+type (
+        Stores struct {
+                RealmStore interfaces.IRealmStore
+        }
+)
+
+func UseStores() fx.Option <span class="cov8" title="1">{
+
+        return fx.Options(
+                fx.Provide(postgres.UsePostgres),
+                fx.Provide(repositories.UsePgRealmStore),
+        )
+}</span>
+</pre>
+		
+		<pre class="file" id="file17" style="display: none">package authHandler
+
+import "github.com/gin-gonic/gin"
+
+func loginHandler(ctx *gin.Context) {<span class="cov8" title="1">
+
+}</span>
+</pre>
+		
+		<pre class="file" id="file18" style="display: none">package authHandler
+
+import "github.com/gin-gonic/gin"
+
+func UseAuthHandlers(r *gin.RouterGroup) <span class="cov8" title="1">{
+
+        r.POST("/login", loginHandler)
+}</span>
+</pre>
+		
+		<pre class="file" id="file19" style="display: none">package handlers
+
+import (
+        "StellaRP/modules/identity/presentation/handlers/authHandler"
+        "StellaRP/modules/identity/presentation/handlers/realmHandler"
+        "github.com/gin-gonic/gin"
+)
+
+func UseHandlers(g *gin.Engine) <span class="cov8" title="1">{
+
+        authHandler.UseAuthHandlers(g.Group("/auth"))
+        realmHandler.UseRealmHandlers(g.Group("/realm"))
+
+}</span>
+</pre>
+		
+		<pre class="file" id="file20" style="display: none">package realmHandler
+
+import (
+        "StellaRP/modules/identity/presentation/contracts"
+        "github.com/gin-gonic/gin"
+        "net/http"
+)
+
+func UseRealmHandlers(r *gin.RouterGroup) <span class="cov8" title="1">{
+        r.POST("", createRealm)
+}</span>
+
+func createRealm(ctx *gin.Context) <span class="cov8" title="1">{
+
+        body := &amp;contracts.RealmCreateRequest{}
+
+        if err := ctx.BindJSON(body); err != nil </span><span class="cov8" title="1">{
+                ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+        }</span>
+}
+</pre>
+		
+		<pre class="file" id="file21" style="display: none">package presentation
+
+import (
+        "StellaRP/modules/identity/presentation/handlers"
+        "context"
+        "github.com/gin-gonic/gin"
+        "go.uber.org/fx"
+        "golang.org/x/sync/errgroup"
+        "net"
+        "net/http"
+        "time"
+)
+
+func UseGin() *gin.Engine <span class="cov8" title="1">{
+        router := gin.Default()
+
+        return router
+}</span>
+
+func StartServer(lc fx.Lifecycle, router *gin.Engine) error <span class="cov0" title="0">{
+
+        s := &amp;http.Server{
+                Addr:           ":8080",
+                Handler:        router,
+                ReadTimeout:    10 * time.Second,
+                WriteTimeout:   10 * time.Second,
+                MaxHeaderBytes: 1 &lt;&lt; 20,
+        }
+
+        lc.Append(fx.Hook{
+                OnStart: func(context.Context) error </span><span class="cov0" title="0">{
+                        ln, err := net.Listen("tcp", s.Addr)
+                        gr, ctx := errgroup.WithContext(context.Background())
+                        if err != nil </span><span class="cov0" title="0">{
+                                return err
+                        }</span>
+
+                        <span class="cov0" title="0">gr.Go(func() error </span><span class="cov0" title="0">{
+                                return s.Serve(ln)
+                        }</span>)
+
+                        <span class="cov0" title="0">return ctx.Err()</span>
+
+                },
+
+                OnStop: func(ctx context.Context) error <span class="cov0" title="0">{
+                        return s.Shutdown(ctx)
+                }</span>,
+        })
+        <span class="cov0" title="0">return nil</span>
+
+}
+
+func UsePresentation() fx.Option <span class="cov8" title="1">{
+        return fx.Options(
+                fx.Provide(UseGin),
+                fx.Invoke(handlers.UseHandlers),
+                fx.Invoke(StartServer),
+        )
+}</span>
+</pre>
+		
+		</div>
+	</body>
+	<script>
+	(function() {
+		var files = document.getElementById('files');
+		var visible;
+		files.addEventListener('change', onChange, false);
+		function select(part) {
+			if (visible)
+				visible.style.display = 'none';
+			visible = document.getElementById(part);
+			if (!visible)
+				return;
+			files.value = part;
+			visible.style.display = 'block';
+			location.hash = part;
+		}
+		function onChange() {
+			select(files.value);
+			window.scrollTo(0, 0);
+		}
+		if (location.hash != "") {
+			select(location.hash.substr(1));
+		}
+		if (!visible) {
+			select("file0");
+		}
+	})();
+	</script>
+</html>
