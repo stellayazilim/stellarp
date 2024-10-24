@@ -54,6 +54,11 @@ func TestShouldCreateConfigFromLoadedEnv(t *testing.T) {
 			expected:    "postgres",
 			method:      "GetPostgresDatabase",
 		},
+		{
+			description: "should have identityModulePort set",
+			expected:    "8091",
+			method:      "GetIdentityModulePort",
+		},
 	}
 
 	for _, test := range tests {

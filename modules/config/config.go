@@ -7,11 +7,12 @@ import (
 )
 
 type Config struct {
-	postgresPassword string
-	postgresUser     string
-	postgresHost     string
-	postgresPort     string
-	postgresDatabase string
+	postgresPassword   string
+	postgresUser       string
+	postgresHost       string
+	postgresPort       string
+	postgresDatabase   string
+	identityModulePort string
 }
 
 func (c Config) GetPostgresPassword() string {
@@ -34,6 +35,9 @@ func (c Config) GetPostgresDatabase() string {
 	return c.postgresDatabase
 }
 
+func (c Config) GetIdentityModulePort() string {
+	return c.identityModulePort
+}
 func loadEnv() error {
 	var err error
 	if testing.Testing() {
@@ -48,10 +52,11 @@ func loadEnv() error {
 
 func newConfig() *Config {
 	return &Config{
-		postgresPassword: os.Getenv("POSTGRES_PASSWORD"),
-		postgresUser:     os.Getenv("POSTGRES_USER"),
-		postgresHost:     os.Getenv("POSTGRES_HOST"),
-		postgresPort:     os.Getenv("POSTGRES_PORT"),
-		postgresDatabase: os.Getenv("POSTGRES_DATABASE"),
+		postgresPassword:   os.Getenv("POSTGRES_PASSWORD"),
+		postgresUser:       os.Getenv("POSTGRES_USER"),
+		postgresHost:       os.Getenv("POSTGRES_HOST"),
+		postgresPort:       os.Getenv("POSTGRES_PORT"),
+		postgresDatabase:   os.Getenv("POSTGRES_DATABASE"),
+		identityModulePort: os.Getenv("IDENTITY_MODULE_PORT"),
 	}
 }
