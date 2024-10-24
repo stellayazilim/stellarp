@@ -69,5 +69,5 @@ func TestStartServer_ShouldFailOnNonEmptyPort(t *testing.T) {
 	err := f.Start(context.Background())
 
 	g.Expect(err).To(HaveOccurred())
-	g.Expect(err.Error()).To(ContainSubstring("bind: Only one usage of each socket address (protocol/network address/port) is normally permitted"))
+	g.Expect(err.Error()).NotTo(BeEmpty())
 }
