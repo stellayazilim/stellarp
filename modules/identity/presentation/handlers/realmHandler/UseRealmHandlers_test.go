@@ -15,8 +15,7 @@ func TestCreateRealmShouldCreateNewRealm(t *testing.T) {
 	r := httptest.NewRecorder()
 	ctx, _ := gin.CreateTestContext(r)
 	req, _ := http.NewRequest("POST", "/realm", bytes.NewBuffer(
-		[]byte(`{
-				"name": "stella"}`)))
+		[]byte("{\"name\": \"stella\"}")))
 	ctx.Request = req
 
 	createRealm(ctx)

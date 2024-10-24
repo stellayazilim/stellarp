@@ -32,6 +32,7 @@ func StartServer(lc fx.Lifecycle, router *gin.Engine) error {
 			ln, err := net.Listen("tcp", s.Addr)
 			gr, ctx := errgroup.WithContext(context.Background())
 			if err != nil {
+
 				return err
 			}
 
