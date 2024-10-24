@@ -1,13 +1,24 @@
 package config
 
-import "go.uber.org/fx"
+import (
+	"fmt"
+	"go.uber.org/fx"
+	"os"
+	"path/filepath"
+)
 
-func UseConfigModule() fx.Option {
-	loadEnv()
+func UseConfigModule(fileNames ...string) fx.Option {
+	cwd, _ := os.Getwd()
 
+	for i := range fileNames {
+		fileNames[i] = filepath.Join(cwd, fileNames[i])
+	}
 	module := fx.Module("ConfigModule", fx.Provide(
-		func() *Config {
-			return newConfig()
+		func() (*Config, error) {
+			err := loadEnv(fileNames...)
+
+			fmt.Println(err)
+			return newConfig(), err
 		},
 	))
 

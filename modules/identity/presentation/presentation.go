@@ -20,7 +20,6 @@ func UseGin() *gin.Engine {
 }
 
 func StartServer(lc fx.Lifecycle, cfg *config.Config, router *gin.Engine) error {
-
 	s := &http.Server{
 		Addr:           fmt.Sprintf(":%s", cfg.GetIdentityModulePort()),
 		Handler:        router,
