@@ -6,7 +6,7 @@ import (
 	"net/http"
 )
 
-func RealmHandler(r *gin.RouterGroup) {
+func UseRealmHandlers(r *gin.RouterGroup) {
 	r.POST("", createRealm)
 }
 

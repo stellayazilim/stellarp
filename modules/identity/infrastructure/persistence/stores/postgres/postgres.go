@@ -11,11 +11,11 @@ func UsePostgres(cfg *config.Config) (*pgx.Conn, error) {
 
 	connString := fmt.Sprintf(
 		"postgres://%s:%s@%s:%d/%s",
-
 		cfg.GetPostgresUser(),
 		cfg.GetPostgresPassword(),
 		cfg.GetPostgresHost(),
 		5432,
+		cfg.GetPostgresDatabase(),
 	)
 
 	conn, err := pgx.Connect(context.Background(), connString)

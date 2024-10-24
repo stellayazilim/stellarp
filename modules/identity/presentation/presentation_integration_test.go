@@ -1,4 +1,4 @@
-package presentation
+﻿package presentation
 
 import (
 	"StellaRP/modules/identity/presentation/handlers"
@@ -20,7 +20,7 @@ func TestGinIntegration(t *testing.T) {
 		fx.Invoke(handlers.UseHandlers),
 		fx.Invoke(func(r *gin.Engine) {
 			w := httptest.NewRecorder()
-			req, _ := http.NewRequest("POST", "/login", nil)
+			req, _ := http.NewRequest("POST", "/auth/login", nil)
 			r.ServeHTTP(w, req)
 
 			g.Expect(w.Code).To(Equal(http.StatusOK))

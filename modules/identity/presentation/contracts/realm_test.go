@@ -11,7 +11,7 @@ func TestREalm_CreateRealmRequest_MustUnMarshalJson(t *testing.T) {
 
 	g := NewWithT(t)
 	jsonS := `{
-    		"name": ""	
+    		"name": "jdoe"	
 	}`
 
 	jData := &RealmCreateRequest{}
