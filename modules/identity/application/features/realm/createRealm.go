@@ -1,6 +1,7 @@
 package realmFeature
 
 import (
+	"StellaRP/modules/identity/application/interfaces"
 	"context"
 	"fmt"
 	"github.com/mehdihadeli/go-mediatr"
@@ -12,7 +13,9 @@ type (
 		Name string
 	}
 	CreateRealmResponse struct{}
-	createRealmHandler  struct{}
+	createRealmHandler  struct {
+		realmStore interfaces.IRealmStore
+	}
 )
 
 func (c *createRealmHandler) Handle(ctx context.Context, command *CreateRealmCommand) (*CreateRealmResponse, error) {

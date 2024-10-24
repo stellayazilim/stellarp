@@ -7,7 +7,11 @@ import (
 	"github.com/jackc/pgx/v5"
 )
 
-func UsePostgres(cfg *config.Config) (*pgx.Conn, error) {
+type IConnection interface {
+	Begin(ctx context.Context) (pgx.Tx, error)
+}
+
+func UsePostgres(cfg *config.Config) (IConnection, error) {
 
 	connString := fmt.Sprintf(
 		"postgres://%s:%s@%s:%d/%s",
@@ -18,12 +22,5 @@ func UsePostgres(cfg *config.Config) (*pgx.Conn, error) {
 		cfg.GetPostgresDatabase(),
 	)
 
-	conn, err := pgx.Connect(context.Background(), connString)
-
-	if err != nil {
-		fmt.Printf("Unable to connect to database: %v\n", err)
-		return nil, err
-	}
-
-	return conn, nil
+	return pgx.Connect(context.Background(), connString)
 }
