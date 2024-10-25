@@ -46,8 +46,8 @@ func TestShouldCreateConfigFromLoadedEnv(t *testing.T) {
 		},
 		{
 			description: "should have postgresHost set",
-			expected:    "localhost",
-			method:      os.Getenv("POSTGRES_HOST"),
+			expected:    os.Getenv("POSTGRES_HOST"),
+			method:      "GetPostgresHost",
 		},
 		{
 			description: "should have postgresDBName set",
