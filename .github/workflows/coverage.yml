@@ -41,7 +41,4 @@ jobs:
         env:
           DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable
         run: |
-          # Run tests for each module in the workspace
-          for dir in $(go list -f '{{.Dir}}' ./...); do
-            (cd "$dir" && go test ./...) || exit 1
-          done
+          go test ./... ./modules/config/...  ./modules/identity/...
