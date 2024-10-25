@@ -28,6 +28,7 @@ jobs:
           --health-timeout 5s
           --health-retries 5
     name: CodeCov
+
     steps:
       - name: Set up Go 1.x
         uses: actions/setup-go@v2
@@ -39,8 +40,3 @@ jobs:
       - name: Test
         run: |
           go test ./... ./modules/config/... ./modules/identity/... -coverprofile cover.out -coverpkg ./... ./modules/config/... ./modules/identity/...
-    env:
-      # The hostname used to communicate with the PostgreSQL service container
-      POSTGRES_HOST: postgres
-      # The default PostgreSQL port
-      POSTGRES_PORT: 5432
