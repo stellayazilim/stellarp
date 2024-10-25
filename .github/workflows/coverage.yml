@@ -1,21 +1,47 @@
-name: CodeCov
+name: Test
 
 on:
+  push:
+    branches: [dev]
   pull_request:
     branches: [dev]
 
 jobs:
-  cd:
-    name: CodeCov
+  test:
     runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:latest
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: postgres
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
-      - name: Set up Go 1.x
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Go
         uses: actions/setup-go@v2
         with:
-          go-version: ^1.23
-        id: go
-      - name: Check out code into the Go module directory
-        uses: actions/checkout@v2
-      - name: Test
+          go-version: '1.23.2'
+
+      - name: Install dependencies
+        run: go mod tidy
+
+      - name: Run tests
+        env:
+          DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable
         run: |
-          go test ./... ./modules/config/... ./modules/identity/... -coverprofile cover.out -coverpkg ./... ./modules/config/... ./modules/identity/...
+          # Run tests for each module in the workspace
+          for dir in $(go list -f '{{.Dir}}' ./...); do
+            (cd "$dir" && go test ./...) || exit 1
+          done

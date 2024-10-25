@@ -1,7 +1,7 @@
 package stores
 
 import (
-	"StellaRP/modules/identity/infrastructure/persistence/interfaces"
+	"StellaRP/modules/identity/application/interfaces"
 	"StellaRP/modules/identity/infrastructure/persistence/stores/postgres"
 	"StellaRP/modules/identity/infrastructure/persistence/stores/postgres/repositories"
 	"go.uber.org/fx"
