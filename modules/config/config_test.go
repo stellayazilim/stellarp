@@ -41,12 +41,12 @@ func TestShouldCreateConfigFromLoadedEnv(t *testing.T) {
 		},
 		{
 			description: "should have postgresPort set",
-			expected:    "",
+			expected:    "5432",
 			method:      "GetPostgresPort",
 		},
 		{
 			description: "should have postgresHost set",
-			expected:    "localhost",
+			expected:    os.Getenv("POSTGRES_HOST"),
 			method:      "GetPostgresHost",
 		},
 		{

@@ -24,6 +24,7 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
+        
 
     steps:
       - name: Checkout code
@@ -37,11 +38,10 @@ jobs:
       - name: Install dependencies
         run: go mod tidy
 
+
+      - name: Load environment variables
+        run: echo "$(cat .test.env)" >> $GITHUB_ENV  # Load .test.env into environment variables
+
       - name: Run tests
-        env:
-          DATABASE_URL: postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable
         run: |
-          # Run tests for each module in the workspace
-          for dir in $(go list -f '{{.Dir}}' ./...); do
-            (cd "$dir" && go test ./...) || exit 1
-          done
+          go test ./... ./modules/config/...  ./modules/identity/...
