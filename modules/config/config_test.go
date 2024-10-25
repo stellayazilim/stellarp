@@ -41,7 +41,7 @@ func TestShouldCreateConfigFromLoadedEnv(t *testing.T) {
 		},
 		{
 			description: "should have postgresPort set",
-			expected:    "",
+			expected:    "5432",
 			method:      "GetPostgresPort",
 		},
 		{
